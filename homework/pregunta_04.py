@@ -4,9 +4,22 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_04():
+    with open('./files/input/data.csv', newline='', encoding='utf-8') as archivo:
+        lectura = csv.reader(archivo, delimiter='\t')
+        contador = {}
+        for data in lectura:
+            duplaFecha= data[2].split('-')
+            if duplaFecha[1] in contador:
+                contador[duplaFecha[1]] += 1
+            else:
+                contador[duplaFecha[1]] = 1
+    contadorOrdenado = sorted(contador.items())
+    print(contadorOrdenado)
+    return contadorOrdenado
+
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la
     cantidad de registros por cada mes, tal como se muestra a continuación.
@@ -26,3 +39,4 @@ def pregunta_04():
      ('12', 3)]
 
     """
+pregunta_04()
