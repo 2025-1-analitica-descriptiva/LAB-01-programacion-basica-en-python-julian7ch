@@ -4,9 +4,33 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
-
+from collections import defaultdict
+import csv
 def pregunta_06():
+    with open('./files/input/data.csv',newline='', encoding='utf-8') as archivo:
+        lectura = csv.reader(archivo, delimiter='\t')
+        listaInteres = []
+        nuevaLista = defaultdict(list)
+        resultado = []
+        for elemento in lectura:
+            data = elemento[4]
+            tupla = []
+            for e in data.split(','):
+                clave, valor = e.split(':')
+                tupla.append((clave, int(valor)))
+
+            listaInteres.extend(tupla)
+        
+        for letra, numero in sorted(listaInteres):
+            nuevaLista[letra].append(numero)
+
+        for letras, num in nuevaLista.items():
+            maxNumero = max(num)
+            minNumero = min(num)
+            resultado.append((letras, minNumero, maxNumero))
+        print(resultado)
+        return resultado
+
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras
     corresponde a una clave y el valor despues del caracter `:` corresponde al
@@ -26,3 +50,4 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+pregunta_06()
