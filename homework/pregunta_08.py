@@ -4,9 +4,25 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
+from collections import defaultdict
 
+import csv
 
 def pregunta_08():
+    with open('./files/input/data.csv', newline='', encoding='utf-8') as archivo:
+        print('hola')
+        lectura = csv.reader(archivo, delimiter='\t')
+        listaInteres = [(int(elemento[1]), elemento[0]) for elemento in lectura]
+        diccionario = defaultdict(list)        
+
+        for clave, valor in sorted(listaInteres):
+                if valor not in diccionario[clave]:
+                    diccionario[clave].append(valor)
+
+        listaFinal =[(clave, lista) for clave, lista in diccionario.items()]
+
+        print(listaFinal)
+        return listaFinal
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla
@@ -27,3 +43,4 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+pregunta_08()
