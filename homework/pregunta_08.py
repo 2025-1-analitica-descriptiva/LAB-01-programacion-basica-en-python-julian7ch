@@ -10,7 +10,6 @@ import csv
 
 def pregunta_08():
     with open('./files/input/data.csv', newline='', encoding='utf-8') as archivo:
-        print('hola')
         lectura = csv.reader(archivo, delimiter='\t')
         listaInteres = [(int(elemento[1]), elemento[0]) for elemento in lectura]
         diccionario = defaultdict(list)        
